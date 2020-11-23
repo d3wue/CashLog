@@ -19,7 +19,7 @@ class CashLogWLP:
         y = LpVariable.dicts(name='y', indexs=self.W, cat=LpBinary)
         
         fixedCosts = lpSum([y[w] * self.warehouses.loc[w].fixedCosts for w in self.W])
-        variableCosts = lpSum([x[w,r] * self.shifts.loc[w,r].shiftsRequired for w,r in self.S]) 
+        variableCosts = lpSum([x[w,r] * self.shifts.loc[w,r].transportationCosts for w,r in self.S]) 
 
         prob += fixedCosts + variableCosts
 
@@ -40,7 +40,7 @@ class CashLogWLP:
         
         self.totalCosts = prob.objective.value()
         self.fixedCosts = sum([y[w].varValue * self.warehouses.loc[w].fixedCosts for w in self.W]) 
-        self.variableCosts = sum([x[w,r].varValue * self.shifts.loc[w,r].shiftsRequired 
+        self.variableCosts = sum([x[w,r].varValue * self.shifts.loc[w,r].transportationCosts 
                                   for w,r in self.S])
         
         
@@ -53,7 +53,6 @@ class CashLogWLP:
                                             'warehouseID':w, 
                                             'serviced': v, 
                                             'zipCode': self.regions.loc[r].zipCode, 
-                                            'shifts': self.shifts.loc[w,r].shiftsRequired, 
                                             'lat': self.regions.loc[r].lat,
                                             'lon': self.regions.loc[r].lon,
                                            'city': self.regions.loc[r].city})
