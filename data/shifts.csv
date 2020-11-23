@@ -1,4 +1,4 @@
-warehouseID,regionID,shiftsRequired
+warehouseID,regionID,transportationCosts
 1,1,4799999520.0
 1,2,4799999520.0
 1,3,4799999520.0
