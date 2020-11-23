@@ -6,11 +6,11 @@ from pulp import *
 class CashLogWLP:
     # MIP for the CashLog warehouse location problem
     def __init__(self):
-        self.warehouses = pd.read_csv('data/warehouses.csv', index_col='warehouseID')
+        self.warehouses = pd.read_csv('https://raw.githubusercontent.com/NikoStein/CashLog/master/data/warehouses.csv', index_col='warehouseID')
         self.W = self.warehouses.index.values
-        self.regions = pd.read_csv('data/regions.csv', index_col='regionID')
+        self.regions = pd.read_csv('https://raw.githubusercontent.com/NikoStein/CashLog/master/data/regions.csv', index_col='regionID')
         self.R = self.regions.index.values
-        self.shifts = pd.read_csv('data/shifts.csv', index_col=['warehouseID', 'regionID'])
+        self.shifts = pd.read_csv('https://raw.githubusercontent.com/NikoStein/CashLog/master/data/shifts.csv', index_col=['warehouseID', 'regionID'])
         self.S = self.shifts.index.values
                 
     def solve(self, n_warehouses=-1, force_open = []):
