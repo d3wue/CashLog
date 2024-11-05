@@ -15,8 +15,8 @@ class CashLogWLP:
                 
     def solve(self, n_warehouses=-1, force_open = []):
         prob = LpProblem('CashLog_BasicAnalysis', LpMinimize)
-        x = LpVariable.dicts(name='x', indexs=self.S, cat=LpBinary)
-        y = LpVariable.dicts(name='y', indexs=self.W, cat=LpBinary)
+        x = LpVariable.dicts(name='x', indices=self.S, cat=LpBinary)
+        y = LpVariable.dicts(name='y', indices=self.W, cat=LpBinary)
         
         fixedCosts = lpSum([y[w] * self.warehouses.loc[w].fixedCosts for w in self.W])
         variableCosts = lpSum([x[w,r] * self.shifts.loc[w,r].transportationCosts for w,r in self.S]) 
